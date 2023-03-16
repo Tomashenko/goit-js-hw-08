@@ -21,25 +21,28 @@ function elementsForSave (e) {
 };
 
 populateForm();
-
-function onFormSubmit(evt) {
-    evt.preventDefault();
-
-    evt.currentTarget.reset();
-
-    localStorage.removeItem('feedback-form-state');
-}
-
+    
 function populateForm() {
 
 const localStorageObject = localStorage.getItem('feedback-form-state');   
-const savedObject = JSON.parse(localStorageObject);
+    const savedObject = JSON.parse(localStorageObject);
+       
+        if (localStorageObject) {
+        refs.textarea.value = savedObject.message;
+        refs.input.value = savedObject.email;
+        }
+    };
+    
+function onFormSubmit(evt) {
 
-    console.log(savedObject);
+    evt.preventDefault();
 
-    if (localStorageObject) {
-    refs.textarea.value = savedObject.message;
-    refs.input.value = savedObject.email;
-    }
-};
+    console.log(formData);
+
+    evt.currentTarget.reset();    
+
+    localStorage.removeItem('feedback-form-state');   
+}
+
+
 
